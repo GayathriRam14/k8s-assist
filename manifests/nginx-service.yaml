@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: dev
+  labels:
+    app: nginx-dev
+spec:
+  selector:
+    app: nginx-dev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: staging
+  labels:
+    app: nginx-staging
+spec:
+  selector:
+    app: nginx-staging
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: prod
+  labels:
+    app: nginx-prod
+spec:
+  selector:
+    app: nginx-prod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
