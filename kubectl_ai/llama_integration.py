@@ -5,6 +5,7 @@ from ollama import chat
 from .safety import is_safe_command
 from .query_detection import detect_query_type, detect_troubleshooting_intent, generate_cluster_info_commands
 from .workflows import TROUBLESHOOTING_WORKFLOWS
+# from llama_cpp import Llama
 
 def build_system_prompt(query_type: str, entities: dict) -> str:
     """Build context-aware system prompts for different query types"""
@@ -249,8 +250,19 @@ def generate_kubectl_commands_with_llama(prompt: str, entities: dict, query_type
                 {"role": "user", "content": prompt}
             ]
         )
-        
         ai_response = response['message']['content'].strip()
+
+        # llm = Llama.from_pretrained(
+        #     repo_id="QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+        #     filename="Meta-Llama-3-8B-Instruct.Q2_K.gguf",
+        # )
+        # response = llm.create_chat_completion(
+        #     messages=[
+        #         {"role": "system", "content": system_prompt},
+        #         {"role": "user", "content": prompt}
+        #     ]
+        # )
+        # ai_response = response['choices'][0]['message']['content'].strip()
         
         # Extract commands and reasoning from Llama's response
         result = parse_llama_response(ai_response, context)
