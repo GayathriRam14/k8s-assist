@@ -3,3 +3,4 @@ venv/
 kubectl_ai.egg-info
 k8s_assist.egg-info
 kubectl_ai/__pycache__
+local-ollama/
